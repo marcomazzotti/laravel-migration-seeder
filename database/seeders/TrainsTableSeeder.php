@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Train;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class TrainsTableSeeder extends Seeder
 {
@@ -13,33 +14,19 @@ class TrainsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $trains = [
-            [
-                "company" => "trenitalia",
-                "departure_station" => "Milano Centrale",
-                "arrival_station" => "Roma Termini",
-                "departure_time" => "12:00:00",
-                "arrival_time" => "15:00:00",
-                "train_code" => 111,
-                "carriages_number" => 15,
-                "on_time" => true,
-                "deleted" => false,
-            ]
-        ];
-
-        foreach ($trains as $train) {
+        for($i = 0; $i < 10; $i++){
             $new_train = new Train();
-            $new_train->company = $train["company"];
-            $new_train->departure_station = $train["departure_station"];
-            $new_train->arrival_station = $train["arrival_station"];
-            $new_train->departure_time = $train["departure_time"];
-            $new_train->arrival_time = $train["arrival_time"];
-            $new_train->train_code = $train["train_code"];
-            $new_train->carriages_number = $train["carriages_number"];
-            $new_train->on_time = $train["on_time"];
-            $new_train->deleted = $train["deleted"];
+            $new_train->company = $faker->company();
+            $new_train->departure_station = $faker->word();
+            $new_train->arrival_station = $faker->word();
+            $new_train->departure_time = $faker->time();
+            $new_train->arrival_time = $faker->time();
+            $new_train->train_code = $faker->randomNumber(4, true);
+            $new_train->carriages_number = $faker->numberBetween(5, 15);
+            $new_train->on_time = $faker->boolean();
+            $new_train->deleted;
             $new_train->save();
         }
     }
