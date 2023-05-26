@@ -7,7 +7,7 @@
         <div class="row row-cols-auto">
             @foreach ($trains as $train)
                 <div class="col">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card my-3">
                         <div class="card-body">
                             <h5 class="card-title">{{ $train->company }}</h5>
                             <p class="card-text">Stazione di partenza: {{ $train->departure_station }}</p>
